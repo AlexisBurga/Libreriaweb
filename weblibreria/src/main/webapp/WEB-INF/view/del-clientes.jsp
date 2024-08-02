@@ -4,32 +4,23 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Clientes-del</title>
+<title>Insert title here</title>
 </head>
 <body>
-    <h1>Lista de Clientes</h1>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <c:forEach var="cliente" items="${clientes}">
-                <tr>
-                    <td>${cliente.id}</td>
-                    <td>${cliente.nombre}</td>
-                    <td>
-                        <form action="eliminarCliente" method="post">
-                            <input type="hidden" name="id" value="${cliente.id}" />
-                            <input type="submit" value="Eliminar" />
-                        </form>
-                    </td>
-                </tr>
-            </c:forEach>
-        </tbody>
-    </table>
+<h1> Clientes </h1>
+ 
+         <form action="del" method="get">
+         
+               <input type="hidden" id="idCliente" name="idCliente" value="${cliente.idCliente}" />
+               
+               <strong>¿Desea Eliminar el dato?</strong>
+               <br/>
+               <button type="submit">Eliminar</button>
+               
+               <button onclick="window.location.href='/ismac-libreria-web-matutino/clientes/findAll';return false ;">
+               Cancelar
+               </button>
+         </form>
+        
 </body>
 </html>

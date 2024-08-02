@@ -11,7 +11,7 @@
     <h1>Clientes</h1>
     
     <!-- Botón para agregar un nuevo cliente -->
-    <button onclick="window.location.href='/ismac-libreria-web/clientes/findOne?opcion=1'; return false;">
+    <button onclick="window.location.href='/weblibreria/clientes/findOne?opcion=1'; return false;">
         Agregar
     </button>
     
@@ -41,11 +41,11 @@
                     <td>${item.correo}</td>
                     <td>
                         <!-- Botón para actualizar el cliente -->
-                        <button onclick="window.location.href='/ismac-libreria-web/clientes/findOne?idCliente=${item.idCliente}&opcion=1'; return false;">
+                        <button onclick="window.location.href='/weblibreria/clientes/findOne?idCliente=${item.idCliente}&opcion=1'; return false;">
                             Actualizar
                         </button>
                         <!-- Botón para eliminar el cliente -->
-                        <button onclick="window.location.href='/ismac-libreria-web/clientes/findOne?idCliente=${item.idCliente}&opcion=2'; return false;">
+                        <button onclick="window.location.href='/weblibreria/clientes/findOne?idCliente=${item.idCliente}&opcion=2'; return false;">
                             Eliminar
                         </button>
                     </td>

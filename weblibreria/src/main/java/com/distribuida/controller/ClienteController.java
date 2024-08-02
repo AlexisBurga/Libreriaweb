@@ -31,16 +31,18 @@ public class ClienteController {
     public String findOne(@RequestParam(value = "idCliente", required = false) Integer idCliente,
                           @RequestParam(value = "opcion", required = false) Integer opcion,
                           Model model) {
-        if (idCliente != null) {
-            Cliente cliente = clienteDao.findOne(idCliente);
-            model.addAttribute("cliente", cliente);
-        }
-        if (opcion != null) {
-            if (opcion == 1) return "add-clientes"; // Vista para agregar o actualizar cliente
-            if (opcion == 2) return "del-clientes"; // Vista para eliminar cliente
-        }
-        return "redirect:/clientes/findAll"; // Redirigir a la lista si no hay opción válida
-    }
+    	//	try {
+		if(idCliente !=null) {
+			Cliente cliente = clienteDao.findOne(idCliente);
+			model.addAttribute("cliente", cliente);
+		}
+		if(opcion == 1) return "add-clientes";  //Actualizacion
+		else return "del-clientes";             //Eliminación
+//	} catch (Exception e) {
+//		// TODO: handle exception
+//	}
+
+}
 
     // Agregar o actualizar un cliente
     @PostMapping("/add")
