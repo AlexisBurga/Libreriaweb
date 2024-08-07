@@ -50,9 +50,7 @@ public class FacturaController {
             Factura factura = facturaDao.findOne(idFactura);
             modelMap.addAttribute("factura", factura);
         }
-        modelMap.addAttribute("autores", autorDao.findAll());
-        modelMap.addAttribute("categorias", categoriaDao.findAll());
-
+    
         // Actualizacion
         if (opcion != null && opcion == 1) {
             return "add-Facturas";

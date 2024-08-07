@@ -8,8 +8,14 @@ public interface LibroDao {
 	
     public List<Libro>findAll();
 
-	public Libro findOne(int id);	
+    public Libro findOne(int id);	
 	public void add(Libro libro);
 	public void up(Libro libro);
 	public void del(int id);
+
+
+
+
+
+	
 }

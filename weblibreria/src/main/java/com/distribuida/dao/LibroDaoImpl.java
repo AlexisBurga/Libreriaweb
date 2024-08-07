@@ -26,7 +26,6 @@ public class LibroDaoImpl implements LibroDao {
 		return session.createQuery("from Libro", Libro.class).getResultList();
 	}
 
-	@Override
 	@Transactional
 	public Libro findOne(int id) {
 		// TODO Auto-generated method stub
@@ -57,5 +56,6 @@ public class LibroDaoImpl implements LibroDao {
 		Session session = sessionFactory.getCurrentSession();
 		session.delete(findOne(id));
 	}
+
 
 }

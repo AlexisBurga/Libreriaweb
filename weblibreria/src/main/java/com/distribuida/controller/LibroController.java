@@ -28,7 +28,8 @@ public class LibroController {
     private CategoriaDao categoriaDao;
     @Autowired
     private AutorDao autorDao;
-
+    
+    
     @GetMapping("/findAll")
     public String findAll(ModelMap modelMap) {
         List<Libro> libros = libroDao.findAll();
@@ -37,25 +38,23 @@ public class LibroController {
     }
 
     @GetMapping("/findOne")
-    public String findOne(@RequestParam("idLibro") Optional<Integer> idLibro,
-                          @RequestParam("opcion") Optional<Integer> opcion,
+    public String findOne(@RequestParam(name="idLibro", required = false) Integer idLibro,
+    		              @RequestParam(name = "opcion", required = false) Integer opcion,
                           ModelMap modelMap) {
-        idLibro.ifPresent(id -> {
-            Libro libro = libroDao.findOne(id);
+       if( idLibro !=null) {
+            Libro libro = libroDao.findOne(idLibro);
             modelMap.addAttribute("libro", libro);
-        });
-
-        modelMap.addAttribute("autores", autorDao.findAll());
-        modelMap.addAttribute("categorias", categoriaDao.findAll());
-
-        return opcion.map(o -> {
-            // Actualización
-            if (o == 1) return "add-libros";
-            // Eliminación
-            else return "del-libros";
-        }).orElse("findAll");
-    }
-
+           //modelMap.addAttribute("autores", autorDao.findAll());
+    	//modelMap.addAttribute("categorias", categoriaDao.findAll());
+       }
+            if (opcion != null && opcion == 1) {
+            	return "add-libros";
+            } else {
+    				return "del-libros";
+            }
+    			
+    	}
+	
     @PostMapping("/add")
     public String add(@RequestParam("idLibro") Optional<Integer> idLibro,
                       @RequestParam("titulo") @Nullable String titulo,
