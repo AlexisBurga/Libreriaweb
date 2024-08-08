@@ -44,8 +44,8 @@ public class LibroController {
        if( idLibro !=null) {
             Libro libro = libroDao.findOne(idLibro);
             modelMap.addAttribute("libro", libro);
-           //modelMap.addAttribute("autores", autorDao.findAll());
-    	//modelMap.addAttribute("categorias", categoriaDao.findAll());
+           modelMap.addAttribute("autores", autorDao.findAll());
+    	modelMap.addAttribute("categorias", categoriaDao.findAll());
        }
             if (opcion != null && opcion == 1) {
             	return "add-libros";
@@ -56,7 +56,7 @@ public class LibroController {
     	}
 	
     @PostMapping("/add")
-    public String add(@RequestParam("idLibro") Optional<Integer> idLibro,
+    public String add(@RequestParam("idLibro") @Nullable Integer idLibro,
                       @RequestParam("titulo") @Nullable String titulo,
                       @RequestParam("editorial") @Nullable String editorial,
                       @RequestParam("num_paginas") @Nullable Integer numPaginas,
@@ -72,39 +72,29 @@ public class LibroController {
                       @RequestParam("precio") @Nullable Double precio,
                       @RequestParam("id_categoria") @Nullable Integer idCategoria,
                       @RequestParam("id_autor") @Nullable Integer idAutor,
-                      ModelMap modelMap) {
+                      ModelMap modelMap )
 
-        Libro libro = new Libro();
-        libro.setTitulo(titulo);
-        libro.setEditorial(editorial);
-        libro.setNumPaginas(numPaginas);
-        libro.setEdicion(edicion);
-        libro.setIdioma(idioma);
-        libro.setFechaPublicacion(fechaPublicacion);
-        libro.setDescripcion(descripcion);
-        libro.setTipoPasta(tipoPasta);
-        libro.setISBN(ISBN);
-        libro.setNumEjemplares(numEjemplares);
-        libro.setPortada(portada);
-        libro.setPresentacion(presentacion);
-        libro.setPrecio(precio != null ? precio : 0.0);
-        
-        if (idCategoria != null) {
-            libro.setCategoria(categoriaDao.findOne(idCategoria));
-        }
-        if (idAutor != null) {
-            libro.setAutor(autorDao.findOne(idAutor));
-        }
-
-        if (idLibro.isPresent()) {
-            libro.setIdLibro(idLibro.get());
-            libroDao.up(libro);
-        } else {
-            libroDao.add(libro);
-        }
-        
-        return "redirect:/libros/findAll";
-    }
+{
+    	if (idLibro == null) {
+			Libro libro = new Libro(0,titulo,editorial,numPaginas,edicion,idioma,fechaPublicacion,descripcion,tipoPasta,ISBN,numEjemplares,portada,presentacion,precio);
+			libro.setCategoria(categoriaDao.findOne(idCategoria));
+			//libro.setAutor(autorDAO.findOne(id_autor));
+			
+			libroDao.add(libro);	
+			
+		}else {
+			
+			Libro libro = new Libro(idLibro,titulo,editorial,numPaginas,edicion,idioma,fechaPublicacion,descripcion,tipoPasta,ISBN,numEjemplares,portada,presentacion,precio);
+			libro.setCategoria(categoriaDao.findOne(idCategoria));
+			//libro.setAutor(autorDAO.findOne(id_autor));
+			
+			libroDao.up(libro);
+			
+		}
+		
+		return "redirect:/libros/libros-listar";
+		
+	}
 
     @GetMapping("/del")
     public String del(@RequestParam("idLibro") Integer idLibro) {
