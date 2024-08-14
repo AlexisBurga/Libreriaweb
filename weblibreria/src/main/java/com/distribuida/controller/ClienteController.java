@@ -26,6 +26,8 @@ public class ClienteController {
         return "listar-clientes"; // Nombre del archivo JSP que debe estar en /WEB-INF/views
     }
 
+    
+    
     // Buscar un cliente por ID y decidir la acción a realizar (Actualizar o Eliminar)
     @GetMapping("/findOne")
     public String findOne(@RequestParam(value = "idCliente", required = false) Integer idCliente,
