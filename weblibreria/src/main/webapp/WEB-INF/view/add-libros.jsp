@@ -1,84 +1,84 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Agregar Libro</title>
+    <meta charset="UTF-8">
+    <title>Agregar/Editar Libro</title>
+    <!-- AsegÃºrate de que el archivo CSS estÃ© en la ruta correcta -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 </head>
 <body>
-<h1> Agregar Libro </h1>
+    <h1>
+        <c:choose>
+            <c:when test="${libro != null && libro.idLibro != null}">
+                Editar Libro
+            </c:when>
+            <c:otherwise>
+                Agregar Nuevo Libro
+            </c:otherwise>
+        </c:choose>
+    </h1>
 
-<form action="addLibro" method="post">
+    <form action="${pageContext.request.contextPath}/libros/add" method="post">
+        <!-- Campo oculto para el ID del libro (solo se usarÃ¡ en caso de ediciÃ³n) -->
+        <input type="hidden" name="idLibro" value="${libro.idLibro}"/>
 
-    <input type="hidden" id="idLibro" name="idLibro" value="${libro.idLibro}" />
+        <label for="titulo">TÃ­tulo:</label>
+        <input type="text" id="titulo" name="titulo" value="${libro.titulo}" required/><br><br>
 
-    Título:
-    <input type="text" id="titulo" name="titulo" value="${libro.titulo}" />
-    <br/>
+        <label for="editorial">Editorial:</label>
+        <input type="text" id="editorial" name="editorial" value="${libro.editorial}"/><br><br>
 
-    Editorial:
-    <input type="text" id="editorial" name="editorial" value="${libro.editorial}" />
-    <br/>
+        <label for="num_paginas">NÃºmero de PÃ¡ginas:</label>
+        <input type="number" id="num_paginas" name="num_paginas" value="${libro.numPaginas}"/><br><br>
 
-    Número de Páginas:
-    <input type="number" id="numPaginas" name="numPaginas" value="${libro.numPaginas}" />
-    <br/>
+        <label for="edicion">EdiciÃ³n:</label>
+        <input type="text" id="edicion" name="edicion" value="${libro.edicion}"/><br><br>
 
-    Edición:
-    <input type="text" id="edicion" name="edicion" value="${libro.edicion}" />
-    <br/>
+        <label for="idioma">Idioma:</label>
+        <input type="text" id="idioma" name="idioma" value="${libro.idioma}"/><br><br>
 
-    Idioma:
-    <input type="text" id="idioma" name="idioma" value="${libro.idioma}" />
-    <br/>
+        <label for="fecha_publicacion">Fecha de PublicaciÃ³n:</label>
+        <input type="date" id="fecha_publicacion" name="fecha_publicacion" value="${libro.fechaPublicacion != null ? libro.fechaPublicacion.toString().substring(0, 10) : ''}"/><br><br>
 
-    Fecha de Publicación:
-    <input type="date" id="fechaPublicacion" name="fechaPublicacion" value="${libro.fechaPublicacion}" />
-    <br/>
+        <label for="descripcion">DescripciÃ³n:</label>
+        <textarea id="descripcion" name="descripcion">${libro.descripcion}</textarea><br><br>
 
-    Descripción:
-    <textarea id="descripcion" name="descripcion">${libro.descripcion}</textarea>
-    <br/>
+        <label for="tipo_pasta">Tipo de Pasta:</label>
+        <input type="text" id="tipo_pasta" name="tipo_pasta" value="${libro.tipoPasta}"/><br><br>
 
-    Tipo de Pasta:
-    <input type="text" id="tipoPasta" name="tipoPasta" value="${libro.tipoPasta}" />
-    <br/>
+        <label for="ISBN">ISBN:</label>
+        <input type="text" id="ISBN" name="ISBN" value="${libro.ISBN}"/><br><br>
 
-    ISBN:
-    <input type="text" id="ISBN" name="ISBN" value="${libro.ISBN}" />
-    <br/>
+        <label for="num_ejemplares">NÃºmero de Ejemplares:</label>
+        <input type="number" id="num_ejemplares" name="num_ejemplares" value="${libro.numEjemplares}"/><br><br>
 
-    Número de Ejemplares:
-    <input type="number" id="numEjemplares" name="numEjemplares" value="${libro.numEjemplares}" />
-    <br/>
+        <label for="portada">Portada:</label>
+        <input type="text" id="portada" name="portada" value="${libro.portada}"/><br><br>
 
-    Portada:
-    <input type="text" id="portada" name="portada" value="${libro.portada}" />
-    <br/>
+        <label for="presentacion">PresentaciÃ³n:</label>
+        <input type="text" id="presentacion" name="presentacion" value="${libro.presentacion}"/><br><br>
 
-    Presentación:
-    <input type="text" id="presentacion" name="presentacion" value="${libro.presentacion}" />
-    <br/>
+        <label for="precio">Precio:</label>
+        <input type="number" step="0.01" id="precio" name="precio" value="${libro.precio}"/><br><br>
 
-    Precio:
-    <input type="number" id="precio" name="precio" step="0.01" value="${libro.precio}" />
-    <br/>
+        <label for="id_categoria">CategorÃ­a:</label>
+        <select id="id_categoria" name="id_categoria">
+            <c:forEach var="categoria" items="${categorias}">
+                <option value="${categoria.idCategoria}" <c:if test="${libro != null && categoria.idCategoria == libro.categoria.idCategoria}">selected</c:if>>${categoria.categoria}</option>
+            </c:forEach>
+        </select><br><br>
 
-    Categoría:
-    <input type="text" id="categoria" name="categoria" value="${libro.categoria}" />
-    <br/>
+        <label for="id_autor">Autor:</label>
+        <select id="id_autor" name="id_autor">
+            <c:forEach var="autor" items="${autores}">
+                <option value="${autor.idAutor}" <c:if test="${libro != null && autor.idAutor == libro.autor.idAutor}">selected</c:if>>${autor.nombre} ${autor.apellido}</option>
+            </c:forEach>
+        </select><br><br>
 
-    Autor:
-    <input type="text" id="autor" name="autor" value="${libro.autor}" />
-    <br/>
-
-    <button type="submit">Guardar</button>
-
-    <button onclick="window.location.href='/weblibreria/libros/findAll'; return false;">
-        Cancelar
-    </button>
-</form>
-
+        <button type="submit">Guardar</button>
+        <a href="${pageContext.request.contextPath}/libros/findAll">Cancelar</a>
+    </form>
 </body>
 </html>

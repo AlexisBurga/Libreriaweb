@@ -209,16 +209,16 @@ public class Libro {
         return categoria;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public static void setCategoria(Categoria categoria) {
+     
     }
 
     public Autor getAutor() {
         return autor;
     }
 
-    public void setAutor(Autor autor) {
-        this.autor = autor;
+    public static void setAutor(Autor autor) {
+    
     }
 
     @Override

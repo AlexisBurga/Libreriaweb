@@ -140,3 +140,15 @@ footer {
 footer p {
     margin: 0;
 }
+img {
+    max-width: 100%;
+    height: auto;
+}
+img {
+    margin: 10px 0;
+}
+table img {
+    width: 200px;
+    height: auto;
+}
+

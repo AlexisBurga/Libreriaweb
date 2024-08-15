@@ -69,7 +69,7 @@ public class AutorController {
 			AutorDao.add(Autor);
 			
 			}else {
-				Autor Autor2 = new Autor(0, nombre, apellido, direccion, telefono, correo, correo);
+				Autor Autor2 = new Autor(idAutor, nombre, apellido, direccion, telefono, correo, correo);
 				AutorDao.up(Autor2);
 			}
 	

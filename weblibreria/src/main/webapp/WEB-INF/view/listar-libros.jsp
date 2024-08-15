@@ -7,6 +7,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/estilos.css">
 </head>
 <body>
 		<h1>Libros</h1>
@@ -57,7 +58,8 @@
 			
 			<td>
 			
-			<img alt="Portada de libro" width="200" height="200"src ="${pageContext.request.contextPath}/resources/img"${item.portada}>
+			<img alt="Portada de libro" width="200" height="200" src="${pageContext.request.contextPath}/resources/img/${item.portada}">
+
 			 
 			
 			
@@ -65,6 +67,7 @@
 			<td>${item.presentacion} </td>
 			<td>${item.precio} </td>
 			<td>${item.categoria.categoria}</td>
+			
 			<td>${item.autor.nombre} ${item.autor.apellido} </td>
 			<td>
 					  <!-- Botón para actualizar el cliente -->
