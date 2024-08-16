@@ -6,58 +6,52 @@ import javax.transaction.Transactional;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
-import com.distribuida.entities.Categoria;
-import com.distribuida.entities.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.distribuida.entities.Categoria;
+
 @Repository
 public class CategoriaDaoImpl implements CategoriaDao {
-	
-	
-	
-	
-	@Autowired
-	private SessionFactory sessionFactory;
-	
-	
-	@Transactional
-	@Override
-	public List<Categoria> findAll() {
-		// TODO Auto-generated method stub
-	Session session= sessionFactory.getCurrentSession();
-		
-	return session.createQuery("from Categoria", Categoria.class).getResultList();
-	}
-	
 
-	@Override
-	public Categoria findOne(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Autowired
+    private SessionFactory sessionFactory;
 
-	@Override
-	public void add(Categoria categoria) {
-		// TODO Auto-generated method stub
+    @Override
+    @Transactional
+    public List<Categoria> findAll() {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Categoria", Categoria.class).getResultList();
+    }
 
-	}
+    @Override
+    @Transactional
+    public Categoria findOne(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(Categoria.class, id);
+    }
 
-	@Override
-	public void up(Categoria categoria) {
-		// TODO Auto-generated method stub
+    @Override
+    @Transactional
+    public void add(Categoria categoria) {
+        Session session = sessionFactory.getCurrentSession();
+        session.saveOrUpdate(categoria);
+    }
 
-	}
+    @Override
+    @Transactional
+    public void up(Categoria categoria) {
+        Session session = sessionFactory.getCurrentSession();
+        session.saveOrUpdate(categoria);
+    }
 
-	@Override
-	public void del(int id) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
+    @Override
+    @Transactional
+    public void del(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        Categoria categoria = findOne(id);  // Primero obtener la entidad
+        if (categoria != null) {
+            session.delete(categoria);  // Eliminar la entidad si existe
+        }
+    }
 }

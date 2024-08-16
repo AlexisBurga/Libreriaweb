@@ -7,6 +7,9 @@ import javax.persistence.Id;
 import javax.persistence.Column;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
+@Component
 @Entity
 @Table(name = "categoria")  // Asegúrate de que el nombre coincida con el nombre de la tabla en la base de datos
 public class Categoria {
@@ -14,7 +17,7 @@ public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_categoria")  // Nombre de la columna en la base de datos
-    private int idCategoria;
+    private Integer idCategoria;  // Usar Integer para permitir valores nulos
 
     @Column(name = "categoria")
     private String categoria;
@@ -24,17 +27,17 @@ public class Categoria {
 
     public Categoria() {}
 
-    public Categoria(int idCategoria, String categoria, String descripcion) {
+    public Categoria(Integer idCategoria, String categoria, String descripcion) {
         this.idCategoria = idCategoria;
         this.categoria = categoria;
         this.descripcion = descripcion;
     }
 
-    public int getIdCategoria() {
+    public Integer getIdCategoria() {
         return idCategoria;
     }
 
-    public void setIdCategoria(int idCategoria) {
+    public void setIdCategoria(Integer idCategoria) {
         this.idCategoria = idCategoria;
     }
 

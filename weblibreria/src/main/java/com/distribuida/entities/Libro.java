@@ -93,140 +93,145 @@ public class Libro {
 
     // Getters y Setters
 
-    public int getIdLibro() {
-        return idLibro;
-    }
+   
 
-    public void setIdLibro(int idLibro) {
-        this.idLibro = idLibro;
-    }
+	public int getIdLibro() {
+		return idLibro;
+	}
 
-    public String getTitulo() {
-        return titulo;
-    }
+	public void setIdLibro(int idLibro) {
+		this.idLibro = idLibro;
+	}
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
+	public String getTitulo() {
+		return titulo;
+	}
 
-    public String getEditorial() {
-        return editorial;
-    }
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
 
-    public void setEditorial(String editorial) {
-        this.editorial = editorial;
-    }
+	public String getEditorial() {
+		return editorial;
+	}
 
-    public int getNumPaginas() {
-        return numPaginas;
-    }
+	public void setEditorial(String editorial) {
+		this.editorial = editorial;
+	}
 
-    public void setNumPaginas(int numPaginas) {
-        this.numPaginas = numPaginas;
-    }
+	public int getNumPaginas() {
+		return numPaginas;
+	}
 
-    public String getEdicion() {
-        return edicion;
-    }
+	public void setNumPaginas(int numPaginas) {
+		this.numPaginas = numPaginas;
+	}
 
-    public void setEdicion(String edicion) {
-        this.edicion = edicion;
-    }
+	public String getEdicion() {
+		return edicion;
+	}
 
-    public String getIdioma() {
-        return idioma;
-    }
+	public void setEdicion(String edicion) {
+		this.edicion = edicion;
+	}
 
-    public void setIdioma(String idioma) {
-        this.idioma = idioma;
-    }
+	public String getIdioma() {
+		return idioma;
+	}
 
-    public Date getFechaPublicacion() {
-        return fechaPublicacion;
-    }
+	public void setIdioma(String idioma) {
+		this.idioma = idioma;
+	}
 
-    public void setFechaPublicacion(Date fechaPublicacion) {
-        this.fechaPublicacion = fechaPublicacion;
-    }
+	public Date getFechaPublicacion() {
+		return fechaPublicacion;
+	}
 
-    public String getDescripcion() {
-        return descripcion;
-    }
+	public void setFechaPublicacion(Date fechaPublicacion) {
+		this.fechaPublicacion = fechaPublicacion;
+	}
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
+	public String getDescripcion() {
+		return descripcion;
+	}
 
-    public String getTipoPasta() {
-        return tipoPasta;
-    }
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 
-    public void setTipoPasta(String tipoPasta) {
-        this.tipoPasta = tipoPasta;
-    }
+	public String getTipoPasta() {
+		return tipoPasta;
+	}
 
-    public String getISBN() {
-        return ISBN;
-    }
+	public void setTipoPasta(String tipoPasta) {
+		this.tipoPasta = tipoPasta;
+	}
 
-    public void setISBN(String ISBN) {
-        this.ISBN = ISBN;
-    }
+	public String getISBN() {
+		return ISBN;
+	}
 
-    public int getNumEjemplares() {
-        return numEjemplares;
-    }
+	public void setISBN(String iSBN) {
+		ISBN = iSBN;
+	}
 
-    public void setNumEjemplares(int numEjemplares) {
-        this.numEjemplares = numEjemplares;
-    }
+	public int getNumEjemplares() {
+		return numEjemplares;
+	}
 
-    public String getPortada() {
-        return portada;
-    }
+	public void setNumEjemplares(int numEjemplares) {
+		this.numEjemplares = numEjemplares;
+	}
 
-    public void setPortada(String portada) {
-        this.portada = portada;
-    }
+	public String getPortada() {
+		return portada;
+	}
 
-    public String getPresentacion() {
-        return presentacion;
-    }
+	public void setPortada(String portada) {
+		this.portada = portada;
+	}
 
-    public void setPresentacion(String presentacion) {
-        this.presentacion = presentacion;
-    }
+	public String getPresentacion() {
+		return presentacion;
+	}
 
-    public double getPrecio() {
-        return precio;
-    }
+	public void setPresentacion(String presentacion) {
+		this.presentacion = presentacion;
+	}
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
+	public double getPrecio() {
+		return precio;
+	}
 
-    public Categoria getCategoria() {
-        return categoria;
-    }
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
 
-    public static void setCategoria(Categoria categoria) {
-     
-    }
+	public Categoria getCategoria() {
+		return categoria;
+	}
 
-    public Autor getAutor() {
-        return autor;
-    }
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
 
-    public static void setAutor(Autor autor) {
-    
-    }
+	public Autor getAutor() {
+		return autor;
+	}
 
-    @Override
-    public String toString() {
-        return "Libro [idLibro=" + idLibro + ", titulo=" + titulo + ", editorial=" + editorial + ", numPaginas="
-                + numPaginas + ", edicion=" + edicion + ", idioma=" + idioma + ", fechaPublicacion="
-                + fechaPublicacion + ", descripcion=" + descripcion + ", tipoPasta=" + tipoPasta + ", ISBN=" + ISBN
-                + ", numEjemplares=" + numEjemplares + ", portada=" + portada + ", presentacion=" + presentacion
-                + ", precio=" + precio + ", categoria=" + categoria + ", autor=" + autor + "]";
-    }
+	public void setAutor(Autor autor) {
+		this.autor = autor;
+	}
+
+	@Override
+	public String toString() {
+		return "Libro [idLibro=" + idLibro + ", titulo=" + titulo + ", editorial=" + editorial + ", numPaginas="
+				+ numPaginas + ", edicion=" + edicion + ", idioma=" + idioma + ", fechaPublicacion=" + fechaPublicacion
+				+ ", descripcion=" + descripcion + ", tipoPasta=" + tipoPasta + ", ISBN=" + ISBN + ", numEjemplares="
+				+ numEjemplares + ", portada=" + portada + ", presentacion=" + presentacion + ", precio=" + precio
+				+ ", categoria=" + categoria + ", autor=" + autor + "]";
+	}
+
+
+	
 }

@@ -17,6 +17,9 @@ import com.distribuida.dao.AutorDao;
 import com.distribuida.dao.CategoriaDao;
 import com.distribuida.dao.LibroDao;
 import com.distribuida.entities.Libro;
+import com.distribuida.entities.Categoria;
+import com.distribuida.entities.Autor;
+
 @Controller
 @RequestMapping("/libros")
 public class LibroController {
@@ -45,8 +48,12 @@ public class LibroController {
             Libro libro = libroDao.findOne(idLibro);
             modelMap.addAttribute("libro", libro);
         }
-        modelMap.addAttribute("autores", autorDao.findAll());
-        modelMap.addAttribute("categorias", categoriaDao.findAll());
+
+        // Cargar todas las categorías y autores
+        List<Categoria> categorias = categoriaDao.findAll();
+        List<Autor> autores = autorDao.findAll();
+        modelMap.addAttribute("categorias", categorias);
+        modelMap.addAttribute("autores", autores);
 
         if (opcion != null && opcion == 1) {
             return "add-libros";
@@ -57,47 +64,52 @@ public class LibroController {
 
     @PostMapping("/add")
     public String add(@RequestParam("idLibro") Optional<Integer> idLibro,
-                      @RequestParam("titulo") Optional<String> titulo,
-                      @RequestParam("editorial") Optional<String> editorial,
-                      @RequestParam("num_paginas") Optional<Integer> numPaginas,
-                      @RequestParam("edicion") Optional<String> edicion,
-                      @RequestParam("idioma") Optional<String> idioma,
-                      @RequestParam("fecha_publicacion") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Optional<Date> fechaPublicacion,
-                      @RequestParam("descripcion") Optional<String> descripcion,
-                      @RequestParam("tipo_pasta") Optional<String> tipoPasta,
-                      @RequestParam("ISBN") Optional<String> ISBN,
-                      @RequestParam("num_ejemplares") Optional<Integer> numEjemplares,
-                      @RequestParam("portada") Optional<String> portada,
-                      @RequestParam("presentacion") Optional<String> presentacion,
-                      @RequestParam("precio") Optional<Double> precio,
-                      @RequestParam("id_categoria") Optional<Integer> idCategoria,
-                      @RequestParam("id_autor") Optional<Integer> idAutor,
-                      ModelMap modelMap) {
-        
+                      @RequestParam("titulo") String titulo,
+                      @RequestParam("editorial") String editorial,
+                      @RequestParam("num_paginas") Integer numPaginas,
+                      @RequestParam("edicion") String edicion,
+                      @RequestParam("idioma") String idioma,
+                      @RequestParam("fecha_publicacion") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaPublicacion,
+                      @RequestParam("descripcion") String descripcion,
+                      @RequestParam("tipo_pasta") String tipoPasta,
+                      @RequestParam("ISBN") String ISBN,
+                      @RequestParam("num_ejemplares") Integer numEjemplares,
+                      @RequestParam("portada") String portada,
+                      @RequestParam("presentacion") String presentacion,
+                      @RequestParam("precio") Double precio,
+                      @RequestParam("idCategoria") Integer idCategoria,
+                      @RequestParam("idAutor") Integer idAutor) {
+
+        // Encontrar la categoría y el autor por sus IDs
+        Categoria categoria = categoriaDao.findOne(idCategoria);
+        Autor autor = autorDao.findOne(idAutor);
+
         Libro libro = new Libro(
             idLibro.orElse(0),
-            titulo.orElse(""),
-            editorial.orElse(""),
-            numPaginas.orElse(0),
-            edicion.orElse(""),
-            idioma.orElse(""),
-            fechaPublicacion.orElse(new Date()),
-            descripcion.orElse(""),
-            tipoPasta.orElse(""),
-            ISBN.orElse(""),
-            numEjemplares.orElse(0),
-            portada.orElse(""),
-            presentacion.orElse(""),
-            precio.orElse(0.0)
+            titulo,
+            editorial,
+            numPaginas,
+            edicion,
+            idioma,
+            fechaPublicacion,
+            descripcion,
+            tipoPasta,
+            ISBN,
+            numEjemplares,
+            portada,
+            presentacion,
+            precio
         );
 
-        Libro.setCategoria(categoriaDao.findOne(idCategoria.orElse(0)));
-        Libro.setAutor(autorDao.findOne(idAutor.orElse(0)));
+        // Establecer la categoría y el autor en el libro
+        libro.setCategoria(categoria);
+        libro.setAutor(autor);
 
-        if (idLibro.isPresent()) {
-            libroDao.up(libro);
+        // Verificar si el libro existe para actualizar o crear uno nuevo
+        if (idLibro.isPresent() && idLibro.get() > 0) {
+            libroDao.up(libro); // Actualizar libro existente
         } else {
-            libroDao.add(libro);
+            libroDao.add(libro); // Crear nuevo libro
         }
 
         return "redirect:/libros/findAll";
