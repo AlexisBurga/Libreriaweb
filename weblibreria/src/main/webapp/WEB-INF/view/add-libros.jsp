@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="ISO-8859-1">
+    <meta charset="UTF-8">
     <title>Sistema Librería</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap-table.min.css">
@@ -11,21 +11,20 @@
 </head>
 
 <body>
-   
     <nav></nav>
 
     <section class="px-5 py-5">
         <div class="container">
-        <h1>
-        <c:choose>
-            <c:when test="${libro != null && libro.idLibro != null}">
-                Editar Libro
-            </c:when>
-            <c:otherwise>
-                Agregar Nuevo Libro
-            </c:otherwise>
-        </c:choose>
-    </h1>
+            <h1>
+                <c:choose>
+                    <c:when test="${libro != null && libro.idLibro != null}">
+                        Editar Libro
+                    </c:when>
+                    <c:otherwise>
+                        Agregar Nuevo Libro
+                    </c:otherwise>
+                </c:choose>
+            </h1>
             <form action="${pageContext.request.contextPath}/libros/add" method="post" class="needs-validation" novalidate>
                 <!-- Campo oculto para el ID del libro (solo se usará en caso de edición) -->
                 <input type="hidden" name="idLibro" value="${libro.idLibro}"/>
@@ -42,7 +41,7 @@
 
                 <div class="form-group">
                     <label for="num_paginas" class="form-label">Número de Páginas</label>
-                    <input class="form-control" type="number" id="num_paginas" name="num_paginas" value="${libro.numPaginas != null ? libro.numPaginas : ''}">
+                    <input class="form-control" type="number" id="num_paginas" name="num_paginas" value="${libro.numPaginas != null ? libro.numPaginas : ''}" required>
                 </div>
 
                 <div class="form-group">
@@ -52,12 +51,12 @@
 
                 <div class="form-group">
                     <label for="idioma" class="form-label">Idioma</label>
-                    <input class="form-control" type="text" id="idioma" name="idioma" value="${libro.idioma != null ? libro.idioma : ''}">
+                    <input class="form-control" type="text" id="idioma" name="idioma" value="${libro.idioma != null ? libro.idioma : ''}"required>
                 </div>
 
                 <div class="form-group">
                     <label for="fecha_publicacion" class="form-label">Fecha de Publicación</label>
-                    <input class="form-control" type="date" id="fecha_publicacion" name="fecha_publicacion" value="${libro.fechaPublicacion != null ? libro.fechaPublicacion.toString().substring(0, 10) : ''}">
+                    <input class="form-control" type="date" id="fecha_publicacion" name="fecha_publicacion" value="${libro.fechaPublicacion != null ? libro.fechaPublicacion.toString().substring(0, 10) : ''}"required>
                 </div>
 
                 <div class="form-group">
@@ -67,17 +66,17 @@
 
                 <div class="form-group">
                     <label for="tipo_pasta" class="form-label">Tipo de Pasta</label>
-                    <input class="form-control" type="text" id="tipo_pasta" name="tipo_pasta" value="${libro.tipoPasta != null ? libro.tipoPasta : ''}">
+                    <input class="form-control" type="text" id="tipo_pasta" name="tipo_pasta" value="${libro.tipoPasta != null ? libro.tipoPasta : ''}"required>
                 </div>
 
                 <div class="form-group">
                     <label for="ISBN" class="form-label">ISBN</label>
-                    <input class="form-control" type="text" id="ISBN" name="ISBN" value="${libro.ISBN != null ? libro.ISBN : ''}">
+                    <input class="form-control" type="text" id="ISBN" name="ISBN" value="${libro.ISBN != null ? libro.ISBN : ''}"required>
                 </div>
 
                 <div class="form-group">
                     <label for="num_ejemplares" class="form-label">Número de Ejemplares</label>
-                    <input class="form-control" type="number" id="num_ejemplares" name="num_ejemplares" value="${libro.numEjemplares != null ? libro.numEjemplares : ''}">
+                    <input class="form-control" type="number" id="num_ejemplares" name="num_ejemplares" value="${libro.numEjemplares != null ? libro.numEjemplares : ''}"required>
                 </div>
 
                 <div class="form-group">
@@ -87,7 +86,7 @@
 
                 <div class="form-group">
                     <label for="presentacion" class="form-label">Presentación</label>
-                    <input class="form-control" type="text" id="presentacion" name="presentacion" value="${libro.presentacion != null ? libro.presentacion : ''}">
+                    <input class="form-control" type="text" id="presentacion" name="presentacion" value="${libro.presentacion != null ? libro.presentacion : ''}"required>
                 </div>
 
                 <div class="form-group">
@@ -97,7 +96,7 @@
 
                 <div class="form-group">
                     <label for="idCategoria" class="form-label">Categoría</label>
-                    <select class="form-control" id="idCategoria" name="idCategoria">
+                    <select class="form-control" id="idCategoria" name="idCategoria" required>
                         <c:forEach var="item" items="${categorias}">
                             <option value="${item.idCategoria}" ${item.idCategoria == libro.categoria.idCategoria ? 'selected' : ''}>
                                 ${item.categoria}
@@ -108,7 +107,7 @@
 
                 <div class="form-group">
                     <label for="idAutor" class="form-label">Autor</label>
-                    <select class="form-control" id="idAutor" name="idAutor">
+                    <select class="form-control" id="idAutor" name="idAutor" required>
                         <c:forEach var="autor" items="${autores}">
                             <option value="${autor.idAutor}" 
                                 <c:if test="${libro.autor != null && autor.idAutor == libro.autor.idAutor}">
@@ -121,14 +120,13 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Guardar
-                <i class="fa-solid fa-floppy-disk fa-sm" style="color: #3dffb5;"></i>
+                    <i class="fa-solid fa-floppy-disk fa-sm" style="color: #3dffb5;"></i>
                 </button>
-                
-                 <button class="btn btn-primary" onclick="window.location.href='/weblibreria/libros/findAll';return false ;">
-                 Cancelar
-                 <i class="fa-solid fa-ban fa-sm" style="color: #ffca57;"></i>
-               
-               </button>
+
+                <button class="btn btn-primary" onclick="window.location.href='/weblibreria/libros/findAll';return false;">
+                    Cancelar
+                    <i class="fa-solid fa-ban fa-sm" style="color: #ffca57;"></i>
+                </button>
             </form>
         </div>
     </section>
@@ -140,14 +138,23 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap-table.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap-table-es-MX.min.js"></script>
-    <script type="text/javascript">
-        var $tabla1 = $('#tabla1');
 
-        $(function() {
-            $tabla1.bootstrapTable({
-                sortReset: true
-            });
-        });
+    <script>
+        (() => {
+            'use strict'
+
+            const forms = document.querySelectorAll('.needs-validation')
+
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
     </script>
 </body>
 </html>
